@@ -12,7 +12,7 @@ export class AuthService {
 
   async register(payload: RegisterDto) {
     const user = await this.userService.findUsername(payload.username);
-    const user = await this.userService.findUsername(payload.username);
+    const email = await this.userService.findUsername(payload.username);
  
     const salt = 10;
     const hashPassword = await bcrypt.hash(payload.password, salt);

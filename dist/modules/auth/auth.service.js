@@ -19,7 +19,7 @@ let AuthService = class AuthService {
     }
     async register(payload) {
         const user = await this.userService.findUsername(payload.username);
-        const user = await this.userService.findUsername(payload.username);
+        const email = await this.userService.findUsername(payload.username);
         const salt = 10;
         const hashPassword = await bcrypt.hash(payload.password, salt);
         payload.password = hashPassword;
