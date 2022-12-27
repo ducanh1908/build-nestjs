@@ -24,7 +24,7 @@ let UsersService = class UsersService {
         this.userRepository = userRepository;
     }
     async create(createUserDto) {
-        const user = await this.userRepository.create(createUserDto);
+        const user = this.userRepository.create(createUserDto);
         return await this.userRepository.save(user);
     }
     async findAll(pageOptionsDto) {
@@ -41,17 +41,17 @@ let UsersService = class UsersService {
     async findOne(id) {
         return this.userRepository.findOneBy({ id });
     }
-    async findUsername(username) {
+    async getUserByName(username) {
         return this.userRepository.findOne({ where: { username } });
     }
-    async findEmail(email) {
+    async getUserByEmail(email) {
         return this.userRepository.findOne({ where: { email } });
     }
     async update(id, updateUserDto) {
-        const username = await this.findUsername(updateUserDto.username);
+        const username = await this.getUserByName(updateUserDto.username);
         if (username)
             throw new common_1.NotFoundException('username already exists');
-        const email = await this.findEmail(updateUserDto.email);
+        const email = await this.getUserByEmail(updateUserDto.email);
         console.log(email);
         if (email)
             throw new common_1.NotFoundException('Email already exists');

@@ -4,4 +4,5 @@ export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
     create(registerDto: RegisterDto): Promise<import("../users/entities/user.entity").User>;
+    login(req: any): Promise<any>;
 }

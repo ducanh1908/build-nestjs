@@ -17,16 +17,27 @@ let AuthService = class AuthService {
     constructor(userService) {
         this.userService = userService;
     }
+    async validateUser(email, password) {
+        const user = await this.userService.getUserByEmail(email);
+        if (!user)
+            throw new common_1.BadRequestException();
+        if (!await bcrypt.compare(password, user.password))
+            throw new common_1.UnauthorizedException();
+        return user;
+    }
     async register(payload) {
-        const user = await this.userService.findUsername(payload.username);
-        const email = await this.userService.findUsername(payload.username);
+        const user = await this.userService.getUserByName(payload.username);
+        if (user)
+            throw new common_1.NotFoundException('User already exists');
+        const email = await this.userService.getUserByEmail(payload.email);
+        if (email)
+            throw new common_1.NotFoundException('Email already exists');
         const salt = 10;
         const hashPassword = await bcrypt.hash(payload.password, salt);
         payload.password = hashPassword;
         return await this.userService.create(payload);
     }
-    async login(login) {
-    }
+    async login(login) { }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),

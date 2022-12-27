@@ -13,6 +13,8 @@ export declare class UsersController {
         password: string;
         email: string;
         id: number;
+        create_at: Date;
+        update_at: Date;
     } & import("./entities/user.entity").User>;
     remove(id: string): Promise<import("./entities/user.entity").User>;
 }

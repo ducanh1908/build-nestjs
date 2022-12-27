@@ -10,13 +10,15 @@ export declare class UsersService {
     create(createUserDto: CreateUserDto): Promise<User>;
     findAll(pageOptionsDto: PageOptionsDto): Promise<PageDto<User>>;
     findOne(id: number): Promise<User>;
-    findUsername(username: string): Promise<User>;
-    findEmail(email: string): Promise<User>;
+    getUserByName(username: string): Promise<User>;
+    getUserByEmail(email: string): Promise<User>;
     update(id: number, updateUserDto: UpdateUserDto): Promise<{
         username: string;
         password: string;
         email: string;
         id: number;
+        create_at: Date;
+        update_at: Date;
     } & User>;
     remove(id: number): Promise<User>;
 }

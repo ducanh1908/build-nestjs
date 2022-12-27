@@ -15,6 +15,8 @@ const users_module_1 = require("./modules/users/users.module");
 const data_source_1 = require("./db/data-source");
 const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./modules/auth/auth.module");
+const categoties_module_1 = require("./modules/categoties/categoties.module");
+const product_module_1 = require("./modules/product/product.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -25,7 +27,9 @@ AppModule = __decorate([
             }),
             typeorm_1.TypeOrmModule.forRoot(data_source_1.dataSourceOptions),
             users_module_1.UsersModule,
-            auth_module_1.AuthModule
+            auth_module_1.AuthModule,
+            categoties_module_1.CategotiesModule,
+            product_module_1.ProductModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
